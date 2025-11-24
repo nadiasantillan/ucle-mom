@@ -6,7 +6,7 @@ import json
 VERIFY_TOKEN = getenv("VERIFY_TOKEN")
 app = FastAPI()
 
-app.get("/")
+@app.get("/")
 def get_root(request: Request, response: Response):
     mode = request.query_params.get('hub.mode')
     challenge = request.query_params.get('hub.challenge')
@@ -19,7 +19,7 @@ def get_root(request: Request, response: Response):
     else:
         response.status_code = status.HTTP_403_FORBIDDEN
 
-app.post("/")
+@app.post("/")
 def post_root(request: Request, response: Response):
     print(json.dumps(request.body()))
     response.status_code = status.HTTP_200_OK  
