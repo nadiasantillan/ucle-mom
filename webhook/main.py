@@ -2,11 +2,12 @@ from typing import Union
 from fastapi import FastAPI, Request, Response, status
 from os import getenv
 import json
+from fastapi.responses import PlainTextResponse
 
 VERIFY_TOKEN = getenv("VERIFY_TOKEN")
 app = FastAPI()
 
-@app.get("/")
+@app.get("/",response_class=PlainTextResponse,)
 def get_root(request: Request, response: Response):
     mode = request.query_params.get('hub.mode')
     challenge = request.query_params.get('hub.challenge')
