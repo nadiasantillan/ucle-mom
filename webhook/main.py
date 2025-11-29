@@ -21,6 +21,6 @@ def get_root(request: Request, response: Response):
         response.status_code = status.HTTP_403_FORBIDDEN
 
 @app.post("/")
-def post_root(request: Request, response: Response):
-    print(json.dumps(request.body()))
+async def post_root(request: Request, response: Response):
+    print(await request.body())
     response.status_code = status.HTTP_200_OK  
